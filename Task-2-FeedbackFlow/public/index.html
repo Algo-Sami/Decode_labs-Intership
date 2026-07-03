@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FeedbackFlow - Professional SaaS feedback management platform and analytics dashboard.">
+  <title>FeedbackFlow | Collect Better Feedback. Build Better Products.</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for stars, status, tools -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="logo-link">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="6" fill="url(#logo-grad)"/>
+            <path d="M7 11H17M7 15H14M7 7H17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="logo-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8b5cf6"/>
+                <stop offset="1" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span>Feedback<span class="logo-accent">Flow</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active" id="link-home">Home</a></li>
+        <li><a href="#dashboard" class="nav-link" id="link-dashboard">Dashboard</a></li>
+        <li><a href="#submit" class="nav-link" id="link-submit">Submit Feedback</a></li>
+        <li><a href="#console" class="nav-link" id="link-console">Developer Console</a></li>
+      </ul>
+
+      <div class="nav-status-container">
+        <span class="status-indicator active" id="server-status-dot"></span>
+        <span class="status-text" id="server-status-text">Server: Online</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main View Container -->
+  <main id="view-container">
+
+    <!-- LANDING VIEW -->
+    <section id="home-view" class="view-section active" aria-labelledby="hero-title">
+      <canvas id="particle-canvas" class="particle-bg"></canvas>
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+      <div class="hero-container">
+        <div class="hero-badge">
+          <span class="badge-text">v1.0.0 is Live</span>
+          <span class="badge-separator"></span>
+          <a href="#dashboard" class="badge-action">Explore Dashboard <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <h1 class="hero-title" id="hero-title">
+          Collect Better Feedback.<br>
+          <span class="grad-text">Build Better Products.</span>
+        </h1>
+        <p class="hero-subtitle">
+          FeedbackFlow helps companies capture structured customer insights, track server performance, and make data-driven decisions through an elegant developer-first platform.
+        </p>
+        <div class="hero-actions">
+          <a href="#submit" class="btn btn-primary" id="hero-btn-submit">
+            <i class="fa-solid fa-plus-circle"></i> Submit Feedback
+          </a>
+          <a href="#dashboard" class="btn btn-secondary" id="hero-btn-explore">
+            <i class="fa-solid fa-chart-line"></i> Explore Dashboard
+          </a>
+        </div>
+        <div class="hero-preview-container">
+          <div class="hero-window-header">
+            <div class="window-dot red"></div>
+            <div class="window-dot yellow"></div>
+            <div class="window-dot green"></div>
+            <div class="window-title">feedbackflow.co/dashboard</div>
+          </div>
+          <div class="hero-window-body">
+            <div class="preview-layout">
+              <div class="preview-sidebar">
+                <div class="skeleton line" style="width: 80%;"></div>
+                <div class="skeleton line" style="width: 60%; margin-top: 12px;"></div>
+                <div class="skeleton line" style="width: 70%; margin-top: 12px;"></div>
+              </div>
+              <div class="preview-main">
+                <div class="preview-grid">
+                  <div class="preview-card skeleton-card">
+                    <div class="skeleton circle"></div>
+                    <div class="skeleton line" style="width: 70%; margin-top: 8px;"></div>
+                  </div>
+                  <div class="preview-card skeleton-card">
+                    <div class="skeleton circle"></div>
+                    <div class="skeleton line" style="width: 50%; margin-top: 8px;"></div>
+                  </div>
+                  <div class="preview-card skeleton-card">
+                    <div class="skeleton circle"></div>
+                    <div class="skeleton line" style="width: 60%; margin-top: 8px;"></div>
+                  </div>
+                </div>
+                <div class="skeleton block" style="height: 120px; margin-top: 16px; border-radius: 8px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD VIEW -->
+    <section id="dashboard-view" class="view-section" aria-labelledby="dashboard-title">
+      <div class="section-container">
+        
+        <header class="dashboard-header">
+          <div>
+            <h1 class="section-title" id="dashboard-title">Dashboard</h1>
+            <p class="section-subtitle">Real-time breakdown of submitted customer sentiments.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-refresh-dashboard">
+            <i class="fa-solid fa-rotate"></i> Refresh
+          </button>
+        </header>
+
+        <!-- Stats Cards Grid -->
+        <div class="stats-grid">
+          <div class="stat-card" id="card-total-feedback">
+            <div class="stat-icon purple"><i class="fa-solid fa-inbox"></i></div>
+            <div class="stat-content">
+              <span class="stat-label">Total Submissions</span>
+              <h2 class="stat-value counter" data-target="0">0</h2>
+              <span class="stat-trend" id="trend-total"><i class="fa-solid fa-arrow-trend-up"></i> Lifetime submissions</span>
+            </div>
+          </div>
+          <div class="stat-card" id="card-today-feedback">
+            <div class="stat-icon blue"><i class="fa-solid fa-calendar-day"></i></div>
+            <div class="stat-content">
+              <span class="stat-label">Submitted Today</span>
+              <h2 class="stat-value counter" data-target="0">0</h2>
+              <span class="stat-trend" id="trend-today">New requests today</span>
+            </div>
+          </div>
+          <div class="stat-card" id="card-rating-feedback">
+            <div class="stat-icon yellow"><i class="fa-solid fa-star"></i></div>
+            <div class="stat-content">
+              <span class="stat-label">Average Rating</span>
+              <h2 class="stat-value"><span class="counter-float" id="avg-rating-val">0.0</span><span class="star-max">/5.0</span></h2>
+              <div class="stat-stars" id="avg-rating-stars">
+                <!-- JavaScript renders stars -->
+              </div>
+            </div>
+          </div>
+          <div class="stat-card" id="card-pending-feedback">
+            <div class="stat-icon orange"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-content">
+              <span class="stat-label">Pending Reviews</span>
+              <h2 class="stat-value counter" data-target="0">0</h2>
+              <span class="stat-trend" id="trend-pending">Awaiting response</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Split Layout -->
+        <div class="dashboard-body">
+          <!-- Main Content: Filters & Feedback List -->
+          <div class="dashboard-main">
+            <!-- Search & Filters Container -->
+            <div class="controls-bar">
+              <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="feedback-search" placeholder="Search by name, email, message or category..." aria-label="Search Feedback">
+              </div>
+              
+              <!-- Category Filter Pills -->
+              <div class="filter-wrapper" role="group" aria-label="Filter Feedback by Category">
+                <button class="filter-pill active" data-category="All">All</button>
+                <button class="filter-pill" data-category="Bug Report">Bug Reports</button>
+                <button class="filter-pill" data-category="Feature Request">Features</button>
+                <button class="filter-pill" data-category="Suggestion">Suggestions</button>
+                <button class="filter-pill" data-category="General Feedback">General</button>
+                <button class="filter-pill" data-category="Complaint">Complaints</button>
+              </div>
+            </div>
+
+            <!-- Feedback Cards List -->
+            <div id="feedback-list-container" class="feedback-list">
+              <!-- Loading Skeletons on Boot -->
+              <div class="feedback-skeleton-loader">
+                <div class="skeleton-card-large">
+                  <div class="skeleton-card-header">
+                    <div class="skeleton circle"></div>
+                    <div class="skeleton block" style="width: 150px; height: 16px;"></div>
+                  </div>
+                  <div class="skeleton block" style="width: 100%; height: 60px; margin-top: 16px;"></div>
+                </div>
+                <div class="skeleton-card-large" style="margin-top: 16px;">
+                  <div class="skeleton-card-header">
+                    <div class="skeleton circle"></div>
+                    <div class="skeleton block" style="width: 120px; height: 16px;"></div>
+                  </div>
+                  <div class="skeleton block" style="width: 100%; height: 40px; margin-top: 16px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty State Layout -->
+            <div id="empty-state" class="empty-state hidden">
+              <div class="empty-illustration">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="60" cy="60" r="50" fill="url(#empty-grad)" fill-opacity="0.05" stroke="url(#empty-grad)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <path d="M50 48H70M50 56H64M50 64H70" stroke="#71717a" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="42" y="36" width="36" height="48" rx="4" stroke="#a1a1aa" stroke-width="2"/>
+                  <circle cx="85" cy="85" r="12" fill="#8b5cf6" stroke="white" stroke-width="2"/>
+                  <path d="M85 81V89M81 85H89" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="empty-grad" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#8b5cf6"/>
+                      <stop offset="1" stop-color="#6366f1"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h3 class="empty-title">No Feedback Yet</h3>
+              <p class="empty-subtitle">Start collecting valuable customer insights today. Your submissions will appear here.</p>
+              <a href="#submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Submit First Feedback</a>
+            </div>
+
+          </div>
+
+          <!-- Sidebar: Live Activity Panel -->
+          <aside class="dashboard-sidebar">
+            <!-- Sidebar Card: Popular Categories -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Categories Breakdown</h3>
+              <div class="category-bars-container" id="category-bars-list">
+                <!-- Javascript maps bars here -->
+              </div>
+            </div>
+
+            <!-- Sidebar Card: Recent Activity -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title"><i class="fa-solid fa-wave-square"></i> Activity Feed</h3>
+              <div class="activity-feed" id="activity-feed-list">
+                <!-- Javascript pushes logs -->
+              </div>
+            </div>
+
+            <!-- Sidebar Card: System Telemetry -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title"><i class="fa-solid fa-server"></i> Server Telemetry</h3>
+              <div class="telemetry-grid">
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Status</span>
+                  <span class="telemetry-value text-green" id="telemetry-status"><span class="telemetry-pulse"></span> Active</span>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Server Uptime</span>
+                  <span class="telemetry-value font-mono" id="telemetry-uptime">0s</span>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">CPU Load</span>
+                  <span class="telemetry-value font-mono" id="telemetry-cpu">1.2%</span>
+                </div>
+                <div class="telemetry-item">
+                  <span class="telemetry-label">Heap Memory</span>
+                  <span class="telemetry-value font-mono" id="telemetry-memory">0 MB</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEEDBACK FORM VIEW -->
+    <section id="submit-view" class="view-section" aria-labelledby="form-title">
+      <div class="section-container max-w-xl">
+        <header class="section-header text-center">
+          <h1 class="section-title" id="form-title">Submit Feedback</h1>
+          <p class="section-subtitle">Let us know how we can improve. Every message helps build a better product.</p>
+        </header>
+
+        <!-- Form Card -->
+        <div class="form-card">
+          <div class="form-progress-bar">
+            <div class="progress-indicator" id="form-progress"></div>
+          </div>
+          
+          <form id="feedback-form" novalidate>
+            <!-- Form Section: User Identity -->
+            <div class="form-section-group">
+              <h3 class="form-section-title"><span class="section-step">1</span> Identity & Company</h3>
+              
+              <div class="form-grid">
+                <!-- Full Name -->
+                <div class="form-field">
+                  <label for="form-name">Full Name <span class="required">*</span></label>
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-user field-icon"></i>
+                    <input type="text" id="form-name" name="name" placeholder="John Doe" required aria-required="true">
+                  </div>
+                  <span class="field-error-msg" id="error-name"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-field">
+                  <label for="form-email">Email Address <span class="required">*</span></label>
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-envelope field-icon"></i>
+                    <input type="email" id="form-email" name="email" placeholder="john@company.com" required aria-required="true">
+                  </div>
+                  <span class="field-error-msg" id="error-email"></span>
+                </div>
+
+                <!-- Company -->
+                <div class="form-field full-width">
+                  <label for="form-company">Company <span class="optional">(Optional)</span></label>
+                  <div class="input-wrapper">
+                    <i class="fa-regular fa-building field-icon"></i>
+                    <input type="text" id="form-company" name="company" placeholder="Acme Corp">
+                  </div>
+                  <span class="field-error-msg" id="error-company"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Section: Feedback Details -->
+            <div class="form-section-group">
+              <h3 class="form-section-title"><span class="section-step">2</span> Feedback Details</h3>
+
+              <div class="form-grid">
+                <!-- Category Select -->
+                <div class="form-field">
+                  <label for="form-category">Category <span class="required">*</span></label>
+                  <div class="input-wrapper">
+                    <i class="fa-solid fa-list-ul field-icon"></i>
+                    <select id="form-category" name="category" required aria-required="true">
+                      <option value="" disabled selected>Select Category</option>
+                      <option value="Bug Report">Bug Report</option>
+                      <option value="Feature Request">Feature Request</option>
+                      <option value="Suggestion">Suggestion</option>
+                      <option value="General Feedback">General Feedback</option>
+                      <option value="Complaint">Complaint</option>
+                    </select>
+                  </div>
+                  <span class="field-error-msg" id="error-category"></span>
+                </div>
+
+                <!-- Rating Stars -->
+                <div class="form-field">
+                  <label>Rating <span class="required">*</span></label>
+                  <div class="star-rating-selector" role="radiogroup" aria-label="Select Rating">
+                    <button type="button" class="star-btn" data-value="1" aria-label="1 Star"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="2" aria-label="2 Stars"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="3" aria-label="3 Stars"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="4" aria-label="4 Stars"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="5" aria-label="5 Stars"><i class="fa-regular fa-star"></i></button>
+                    <input type="hidden" id="form-rating" name="rating" required>
+                  </div>
+                  <span class="field-error-msg" id="error-rating"></span>
+                </div>
+
+                <!-- Feedback Message -->
+                <div class="form-field full-width">
+                  <label for="form-message">Feedback Message <span class="required">*</span></label>
+                  <div class="input-wrapper text-area-wrapper">
+                    <textarea id="form-message" name="message" rows="5" placeholder="Share the details here... What happened? What do you suggest?" required aria-required="true"></textarea>
+                    <div class="char-counter"><span id="message-char-count">0</span> / 1000</div>
+                  </div>
+                  <span class="field-error-msg" id="error-message"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Action Submit -->
+            <div class="form-actions-footer">
+              <button type="button" class="btn btn-secondary" id="btn-reset-form">Clear Form</button>
+              <button type="submit" class="btn btn-primary" id="btn-submit-feedback">
+                <span class="btn-text">Submit Feedback</span>
+                <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVELOPER CONSOLE VIEW -->
+    <section id="console-view" class="view-section" aria-labelledby="console-title">
+      <div class="section-container">
+        <header class="section-header">
+          <h1 class="section-title" id="console-title"><i class="fa-solid fa-terminal text-purple"></i> Developer Console</h1>
+          <p class="section-subtitle">Interact with the in-memory Express REST API directly. Inspect response times, statuses, and headers.</p>
+        </header>
+
+        <!-- Console Grid Layout -->
+        <div class="console-grid">
+          <!-- Left Console Pane: Request Parameters -->
+          <div class="console-pane request-pane">
+            <h3 class="pane-title">Request Workspace</h3>
+            
+            <div class="console-row inline">
+              <!-- HTTP Method -->
+              <div class="console-field size-sm">
+                <label for="console-method">Method</label>
+                <select id="console-method">
+                  <option value="GET" selected>GET</option>
+                  <option value="POST">POST</option>
+                </select>
+              </div>
+
+              <!-- Endpoint Selector -->
+              <div class="console-field fill">
+                <label for="console-endpoint">API Route</label>
+                <div class="input-group">
+                  <span class="input-addon">/api</span>
+                  <select id="console-endpoint">
+                    <option value="/feedback" selected>/feedback (Retreive/Create Feedback)</option>
+                    <option value="/stats">/stats (Server Analytics & Telemetry)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Headers section -->
+            <div class="console-field">
+              <label>Headers</label>
+              <div class="mock-headers font-mono">
+                <div><span>Content-Type</span> : <span>application/json</span></div>
+                <div><span>Accept</span> : <span>application/json</span></div>
+              </div>
+            </div>
+
+            <!-- Request Body Panel -->
+            <div class="console-field body-field" id="console-body-wrapper" style="opacity: 0.5; pointer-events: none;">
+              <label for="console-body">Request Body (JSON)</label>
+              <textarea id="console-body" class="code-editor" rows="8" placeholder="{ ... }" disabled>{
+  "name": "Alex Carter",
+  "email": "alex.carter@dev.co",
+  "company": "Vercel",
+  "category": "Feature Request",
+  "rating": 5,
+  "message": "This is a custom feedback submission processed directly via the Developer Console Sandbox!"
+}</textarea>
+              <span class="body-hint" id="body-json-error">Valid JSON format required.</span>
+            </div>
+
+            <!-- Execute Button -->
+            <div class="console-actions">
+              <button class="btn btn-primary btn-block" id="btn-execute-request">
+                <span class="btn-text"><i class="fa-solid fa-play"></i> Send Request</span>
+                <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Console Pane: Response Output -->
+          <div class="console-pane response-pane">
+            <div class="pane-header-actions">
+              <h3 class="pane-title">Response Viewer</h3>
+              <button class="btn btn-secondary btn-xs" id="btn-clear-console"><i class="fa-solid fa-trash"></i> Clear</button>
+            </div>
+
+            <div class="response-telemetry" id="response-meta-container">
+              <div class="meta-tag">
+                <span class="label">Status:</span>
+                <span class="value badge-inactive" id="resp-status">-</span>
+              </div>
+              <div class="meta-tag">
+                <span class="label">Time:</span>
+                <span class="value font-mono" id="resp-time">-</span>
+              </div>
+              <div class="meta-tag">
+                <span class="label">Size:</span>
+                <span class="value font-mono" id="resp-size">-</span>
+              </div>
+            </div>
+
+            <div class="response-viewport">
+              <pre><code class="language-json" id="resp-body-viewer">// Click "Send Request" to invoke API</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Developer Mode Trigger Button -->
+  <button class="dev-mode-floating-btn" id="dev-drawer-toggle" aria-label="Toggle Developer Mode Telemetry Drawer">
+    <div class="dev-btn-content">
+      <i class="fa-solid fa-code"></i>
+      <span class="dev-btn-tooltip">Dev Mode</span>
+    </div>
+    <span class="dev-badge-pulse" id="dev-active-indicator"></span>
+  </button>
+
+  <!-- Developer Mode Telemetry Drawer (Slideout Panel) -->
+  <section class="dev-drawer" id="dev-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <h2><i class="fa-solid fa-gears text-purple"></i> Telemetry</h2>
+        <span class="drawer-status-pill"><span class="telemetry-pulse"></span> Streaming</span>
+      </div>
+      <button class="drawer-close-btn" id="dev-drawer-close" aria-label="Close Developer Telemetry Drawer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Section: Request counters -->
+      <div class="drawer-section">
+        <h3 class="drawer-sec-title">Server Workload</h3>
+        <div class="workload-stats">
+          <div class="w-stat">
+            <span class="w-label">Total Requests</span>
+            <span class="w-val font-mono text-purple" id="telemetry-total-requests">0</span>
+          </div>
+          <div class="w-stat">
+            <span class="w-label">GET API Calls</span>
+            <span class="w-val font-mono" id="telemetry-get-count">0</span>
+          </div>
+          <div class="w-stat">
+            <span class="w-label">POST API Calls</span>
+            <span class="w-val font-mono" id="telemetry-post-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Last Request Telemetry -->
+      <div class="drawer-section">
+        <h3 class="drawer-sec-title">Last Inbound Request</h3>
+        <div class="last-req-summary" id="dev-last-req-empty">
+          No requests processed since server startup.
+        </div>
+        <div class="last-req-data hidden" id="dev-last-req-data">
+          <div class="req-row">
+            <span class="req-method-badge" id="dev-last-method">GET</span>
+            <span class="req-path font-mono" id="dev-last-path">/api/feedback</span>
+          </div>
+          <table class="req-details-table">
+            <tr>
+              <td>Status Code</td>
+              <td><span class="status-val-badge" id="dev-last-status">200</span></td>
+            </tr>
+            <tr>
+              <td>Response Time</td>
+              <td class="font-mono" style="color: var(--accent-purple); font-weight: 600;" id="dev-last-duration">4.20ms</td>
+            </tr>
+            <tr>
+              <td>Response Size</td>
+              <td class="font-mono" id="dev-last-size">142 B</td>
+            </tr>
+            <tr>
+              <td>Timestamp</td>
+              <td class="font-mono text-muted" id="dev-last-time">09:12:45</td>
+            </tr>
+          </table>
+
+          <div class="req-json-toggle-header">
+            <span>Payload / Error Body</span>
+            <button class="btn btn-secondary btn-xxs" id="btn-copy-telemetry-json">Copy JSON</button>
+          </div>
+          <div class="req-json-view">
+            <pre><code id="dev-last-json-viewer">{}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Endpoints Reference Cheat-sheet -->
+      <div class="drawer-section">
+        <h3 class="drawer-sec-title">REST API Endpoints</h3>
+        <div class="endpoints-cheat-list">
+          <div class="cheat-item">
+            <div class="cheat-header">
+              <span class="cheat-method get">GET</span>
+              <span class="cheat-path">/api/feedback</span>
+            </div>
+            <p class="cheat-desc">Fetch complete feedback array. Supports client searches.</p>
+          </div>
+          
+          <div class="cheat-item">
+            <div class="cheat-header">
+              <span class="cheat-method post">POST</span>
+              <span class="cheat-path">/api/feedback</span>
+            </div>
+            <p class="cheat-desc">Submit new feedback. Body requires: name, email, category, rating, message.</p>
+          </div>
+
+          <div class="cheat-item">
+            <div class="cheat-header">
+              <span class="cheat-method get">GET</span>
+              <span class="cheat-path">/api/stats</span>
+            </div>
+            <p class="cheat-desc">Collect real-time telemetry metrics and category summaries.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS DIALOG MODAL -->
+  <div class="modal-backdrop hidden" id="success-modal-backdrop">
+    <div class="modal-card" id="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <canvas id="confetti-canvas" class="confetti-overlay"></canvas>
+      <div class="modal-content">
+        <div class="modal-icon-glow">
+          <div class="modal-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+        <h2 class="modal-title" id="modal-title">Thank You!</h2>
+        <p class="modal-body-text">
+          Your feedback has been successfully submitted. We compile every report to help improve our systems and deliver a better product.
+        </p>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="btn-modal-close">Back to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Scripts -->
+  <script src="js/canvas-particles.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
