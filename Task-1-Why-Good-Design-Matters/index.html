@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive UX mystery. This website has serious usability problems. Something feels wrong. Can you find out why?">
+  <title>Can You Find What's Wrong? — An Interactive UX Mystery</title>
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+  <div class="custom-cursor-dot" id="customCursorDot" aria-hidden="true"></div>
+
+  <!-- Top Sticky Header & Progress Navigation -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <a href="#" class="logo-link" aria-label="UX Mystery Home">
+        <span class="logo-icon" aria-hidden="true">🔍</span>
+        <span class="logo-text">Design<span class="highlight">Mystery</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul>
+          <li><a href="#detective-section" class="nav-item">Investigation</a></li>
+          <li><a href="#lab-section" class="nav-item">Design Lab</a></li>
+          <li><a href="#wireframe-section" class="nav-item">Wireframe</a></li>
+          <li><a href="#research-section" class="nav-item">Research</a></li>
+          <li><a href="#decisions-section" class="nav-item">Principles</a></li>
+          <li><a href="#responsive-section" class="nav-item">Responsive</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-widgets">
+        <!-- Live Design Score Indicator -->
+        <div class="score-widget" id="headerScoreWidget" aria-live="polite" aria-label="Current design score">
+          <span class="score-label">Design Score</span>
+          <div class="score-value-wrapper">
+            <span class="score-number" id="headerScoreValue">10</span>
+            <span class="score-total">/100</span>
+          </div>
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" id="headerScoreFill" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- Accessible Quick Action Toggle -->
+        <button id="quickAccessibilityBtn" class="quick-access-btn" aria-label="Open Accessibility Panel" aria-haspopup="true" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Accessibility Center Dialog Widget -->
+  <div class="accessibility-panel" id="accessibilityPanel" role="dialog" aria-modal="true" aria-label="Accessibility Center" aria-hidden="true">
+    <div class="acc-panel-header">
+      <h3>Accessibility Center</h3>
+      <button class="close-panel-btn" id="closeAccPanelBtn" aria-label="Close Accessibility Panel">&times;</button>
+    </div>
+    <div class="acc-panel-body">
+      <div class="control-group">
+        <label for="themeToggle">Theme Mode</label>
+        <div class="toggle-switch-wrapper">
+          <span class="toggle-text">Dark Mode</span>
+          <button id="themeToggle" class="toggle-switch" aria-pressed="false" role="switch">
+            <span class="toggle-slider"></span>
+          </button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="contrastToggle">Contrast Enhancement</label>
+        <div class="toggle-switch-wrapper">
+          <span class="toggle-text">High Contrast</span>
+          <button id="contrastToggle" class="toggle-switch" aria-pressed="false" role="switch">
+            <span class="toggle-slider"></span>
+          </button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="textScaleSelect">Text Scaling</label>
+        <select id="textScaleSelect" class="styled-select" aria-label="Adjust text size scale">
+          <option value="1">Standard (100%)</option>
+          <option value="1.15">Large (115%)</option>
+          <option value="1.3">Extra Large (130%)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="keyboardHelpToggle">Keyboard Assist</label>
+        <div class="toggle-switch-wrapper">
+          <span class="toggle-text">Focus Highlight</span>
+          <button id="keyboardHelpToggle" class="toggle-switch" aria-pressed="false" role="switch">
+            <span class="toggle-slider"></span>
+          </button>
+        </div>
+      </div>
+      <div class="acc-panel-footer">
+        <p class="wcag-guarantee">✓ Built to exceed WCAG 2.1 AA Standards</p>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" aria-label="Welcome">
+      <div class="hero-bg-gradients">
+        <div class="gradient-sphere sphere-1"></div>
+        <div class="gradient-sphere sphere-2"></div>
+      </div>
+      <div class="container hero-container">
+        <div class="badge-wrapper fade-in-up">
+          <span class="hero-badge">Interactive Mystery</span>
+        </div>
+        <h1 class="hero-title fade-in-up">
+          This Website Is <span class="gradient-text-red">A Disaster.</span>
+        </h1>
+        <p class="hero-subheadline fade-in-up">
+          Something feels catastrophically wrong. Most visitors can't even describe why.
+        </p>
+        <p class="hero-mystery-line fade-in-up">
+          25 hidden problems &nbsp;·&nbsp; 0 clues given &nbsp;·&nbsp; You're on your own.
+        </p>
+        <div class="hero-actions fade-in-up">
+          <a href="#detective-section" class="btn btn-primary ripple" id="startInvestigationBtn">
+            <span>Begin Investigation</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <div class="hero-interactive-scroll fade-in-up">
+          <span class="scroll-label">Scroll to Begin</span>
+          <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. INVESTIGATION SECTION -->
+    <section id="detective-section" class="detective-section scroll-reveal" aria-label="Investigation">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">The Broken Experience</h2>
+          <p class="section-desc">
+            This interface is a catastrophe. Click anything that feels wrong, broken, or frustrating. There are 25 hidden problems scattered throughout.
+          </p>
+        </div>
+
+        <div class="detective-layout">
+          <!-- Left Panel: Investigation Log -->
+          <aside class="mission-panel" aria-label="Investigation Log">
+            <div class="mission-header">
+              <span class="radar-ping"></span>
+              <h3>Investigation Log</h3>
+            </div>
+
+            <!-- Case Progress Score -->
+            <div class="mission-score-card">
+              <span class="card-label">Case Progress</span>
+              <div class="score-flex">
+                <span class="score-display" id="detectiveScore">10%</span>
+                <span class="score-subtext" id="detectiveStatus">Complete Disaster</span>
+              </div>
+              <div class="score-progress-track">
+                <div class="score-progress-fill" id="detectiveProgressFill" style="width: 10%;"></div>
+              </div>
+              <div class="clues-counter">
+                <span class="clues-label">Problems Fixed</span>
+                <span class="clues-value" id="cluesFound">0 / 25</span>
+              </div>
+            </div>
+
+            <!-- Evidence Notebook — 25 slots -->
+            <div class="evidence-notebook" id="evidenceNotebook">
+              <div class="notebook-label">Evidence Board</div>
+              <div class="evidence-grid">
+                <!-- 25 evidence slots -->
+                <div class="evidence-slot" id="evidence-1" data-problem-id="1"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-2" data-problem-id="2"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-3" data-problem-id="3"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-4" data-problem-id="4"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-5" data-problem-id="5"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-6" data-problem-id="6"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-7" data-problem-id="7"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-8" data-problem-id="8"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-9" data-problem-id="9"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-10" data-problem-id="10"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-11" data-problem-id="11"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-12" data-problem-id="12"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-13" data-problem-id="13"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-14" data-problem-id="14"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-15" data-problem-id="15"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-16" data-problem-id="16"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-17" data-problem-id="17"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-18" data-problem-id="18"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-19" data-problem-id="19"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-20" data-problem-id="20"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-21" data-problem-id="21"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-22" data-problem-id="22"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-23" data-problem-id="23"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-24" data-problem-id="24"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+                <div class="evidence-slot" id="evidence-25" data-problem-id="25"><div class="evidence-icon">?</div><div class="evidence-text"><span class="evidence-status">Undiscovered</span></div></div>
+              </div>
+            </div>
+
+          </aside>
+
+          <!-- Right Workspace: Flawed/Transforming Preview Frame -->
+          <div class="workspace-viewport">
+            <div class="viewport-header-bar">
+              <div class="viewport-controls">
+                <span class="dot-btn red"></span>
+                <span class="dot-btn yellow"></span>
+                <span class="dot-btn green"></span>
+              </div>
+              <div class="viewport-address" aria-hidden="true">
+                https://frustrating-app-prototype.io/dashboard
+              </div>
+            </div>
+
+            <!-- Hint & Push Error Action Panel -->
+            <div class="hint-action-panel" id="hintActionPanel">
+              <div class="hint-panel-inner">
+                <div class="hint-panel-left">
+                  <span class="hint-panel-icon">💡</span>
+                  <span class="hint-panel-label" id="hintPanelLabel">Hint available in <span id="hintCountdown">5</span>s</span>
+                </div>
+                <div class="hint-panel-actions">
+                  <button class="hint-action-btn hint-btn-main" id="toggleHelperBtn" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Show Hint
+                  </button>
+                  <button class="hint-action-btn push-error-btn" id="pushErrorBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Fix Error
+                  </button>
+                </div>
+              </div>
+              <!-- Hint/Error explanation bar (slides in) -->
+              <div class="hint-explanation-bar" id="hintExplanationBar">
+                <span class="hint-explanation-icon" id="hintExplanationIcon">💡</span>
+                <p class="hint-explanation-text" id="hintExplanationText"></p>
+                <button class="hint-explanation-close" id="hintExplanationClose" aria-label="Dismiss">&times;</button>
+              </div>
+            </div>
+
+            <!-- ============================================================
+                 THE LIVE WEB APP FRAME — CATASTROPHICALLY BAD DESIGN
+                 ============================================================ -->
+            <div class="preview-app-container flawed-layout" id="flawedAppFrame">
+
+              <!-- ===== HEADER AREA ===== -->
+              <header class="app-frame-header" id="appFrameHeader">
+
+                <!-- FLAW 1: Comic Sans logo with terrible colors -->
+                <div class="app-frame-logo" id="flaw-logo">
+                  <div class="hotspot-trigger" id="hotspot1" data-problem-id="1" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <span class="logo-symbol">❖</span>
+                  <span class="logo-label">FinFlow</span>
+                </div>
+
+                <!-- FLAW 2: Navigation chaos -->
+                <nav class="app-frame-nav" id="appFrameNav" aria-label="Simulated Header Navigation">
+                  <div class="hotspot-trigger" id="hotspot2" data-problem-id="2" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <ul class="nav-links-wrapper flawed-nav-links">
+                    <li><a href="#" onclick="return false;">Overview</a></li>
+                    <li><a href="#" onclick="return false;">Rptz</a></li>
+                    <li><a href="#" onclick="return false;">??</a></li>
+                    <li><a href="#" onclick="return false;" class="hidden-flawed">Sttngs</a></li>
+                    <li><a href="#" onclick="return false;">Click Me</a></li>
+                    <li><a href="#" onclick="return false;">N/A</a></li>
+                  </ul>
+                  <ul class="nav-links-wrapper resolved-nav-links">
+                    <li><a href="#" onclick="return false;" class="active">Overview</a></li>
+                    <li><a href="#" onclick="return false;">Reports</a></li>
+                    <li><a href="#" onclick="return false;">Analytics</a></li>
+                    <li><a href="#" onclick="return false;">Settings</a></li>
+                  </ul>
+                </nav>
+
+                <!-- FLAW 3: Header action buttons -->
+                <div class="app-frame-header-actions" id="flaw-header-actions">
+                  <div class="hotspot-trigger" id="hotspot3" data-problem-id="3" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <div class="flawed-header-actions-wrap">
+                    <button class="flaw-header-btn-tiny" aria-label="Notifications">🔔</button>
+                    <button class="flaw-header-btn-huge" aria-label="Profile">👤 User Profile Account Settings Menu Panel</button>
+                  </div>
+                  <div class="resolved-header-actions-wrap">
+                    <button class="resolved-header-btn-bell" aria-label="Notifications">
+                      🔔
+                      <span class="notif-badge-dot"></span>
+                    </button>
+                    <button class="resolved-header-btn-profile" aria-label="Profile">👤 Profile</button>
+                  </div>
+                </div>
+              </header>
+
+              <!-- ===== APP MAIN BODY ===== -->
+              <div class="app-frame-body" id="appFrameBody">
+
+                <!-- ROW 1: Alert Banner — FLAW 4 -->
+                <div class="flaw-alert-bar" id="flaw-alert-bar">
+                  <div class="hotspot-trigger" id="hotspot4" data-problem-id="4" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <div class="flawed-alert-bar-inner">
+                    <span class="flaw-alert-text">⚠ CRITICAL URGENT IMPORTANT ALERT WARNING ERROR NOTICE: Your session may expire. Also your account needs attention. Also there is a new update. Also review policy. Also check notifications. Click here to dismiss or not, it doesn't matter.</span>
+                    <button class="flaw-alert-close">×</button>
+                  </div>
+                  <div class="resolved-alert-bar-inner">
+                    <span class="alert-icon">⚠️</span>
+                    <span class="alert-text">Your session will expire in 25 minutes. Please save your work to prevent loss of unsaved changes.</span>
+                    <button class="resolved-alert-close">&times;</button>
+                  </div>
+                </div>
+
+                <!-- ROW 2: Welcome Banner — FLAW 5, 6 -->
+                <div class="frame-welcome-banner" id="welcomeBanner">
+                  <div class="hotspot-trigger" id="hotspot5" data-problem-id="5" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <div class="welcome-text-group">
+                    <h3 class="welcome-title flawed-welcome-title" id="welcomeBannerTitle">User Account Portal Dashboard Info Management Center Home Page Overview</h3>
+                    <h3 class="welcome-title resolved-welcome-title">Dashboard Overview</h3>
+                    <!-- FLAW 6: Tiny body text -->
+                    <p class="welcome-desc" id="welcomeBodyText">
+                      <span class="hotspot-trigger inline" id="hotspot6" data-problem-id="6" tabindex="0" role="button" aria-label="Click to inspect this area">
+                        <span class="hotspot-dot small"></span>
+                      </span>
+                      Welcome to FinFlow. This application allows users to check transactions, monitor expenses, track budget limits, print out statements, and request support. Make sure to keep your profile settings up to date and set valid notification triggers to receive active analytics. Also please read the terms. Also check back daily. Also enable 2FA. Also verify your email.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- ROW 3: Main Dashboard Grid -->
+                <div class="frame-dashboard-grid" id="dashboardGrid">
+
+                  <!-- Card 1: Transaction — FLAW 7 (Contrast) -->
+                  <article class="dashboard-card summary-card" id="summaryCard">
+                    <div class="hotspot-trigger" id="hotspot7" data-problem-id="7" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="card-title">Transaction Limits</h4>
+                    <p class="card-accent-num">$4,500.00 <span class="trend-badge">▲ 12%</span></p>
+                    <p class="card-contrast-copy" id="contrastCopyText">
+                      Notice: Standard transfer speeds depend heavily on banking hours. Transacting outside business hours will incur an additional network fee of 0.8% and might delay deposits up to 48 hours. Please review terms before proceeding.
+                    </p>
+                  </article>
+
+                  <!-- Card 2: Action Form — FLAW 8 (Button hierarchy) -->
+                  <article class="dashboard-card form-card" id="formCard">
+                    <div class="hotspot-trigger" id="hotspot8" data-problem-id="8" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="card-title">Quick Action Portal</h4>
+                    <p class="card-sub-label">Initiate secure transfer validation token</p>
+                    <div class="card-interactive-box">
+                      <input type="text" placeholder="Recipient address hash..." class="frame-input" disabled value="0x89D2...4F6A">
+                      <div class="frame-btn-row flawed-btn-row">
+                        <button class="frame-cancel-btn" aria-label="Cancel Action">CANCEL THIS ACTION IMMEDIATELY</button>
+                        <button class="frame-cta-btn" id="flawedCtaBtn" aria-label="Validate Token Action">
+                          <span>v</span>
+                        </button>
+                      </div>
+                      <div class="frame-btn-row resolved-btn-row">
+                        <button class="btn-cancel-secondary" aria-label="Cancel Action">Cancel</button>
+                        <button class="btn-validate-primary" aria-label="Validate Token Action">Validate & Send Token</button>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- Card 3: Stats — FLAW 9 (Garish colors) -->
+                  <article class="dashboard-card stats-card" id="statsCard">
+                    <div class="hotspot-trigger" id="hotspot9" data-problem-id="9" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="card-title">Monthly Analytics</h4>
+                    <div class="flaw-stat-row flawed-stat-row">
+                      <div class="flaw-stat-item flaw-stat-red">
+                        <span class="flaw-stat-num">84%</span>
+                        <span class="flaw-stat-label">Bounce Rate</span>
+                      </div>
+                      <div class="flaw-stat-item flaw-stat-lime">
+                        <span class="flaw-stat-num">2.1s</span>
+                        <span class="flaw-stat-label">Load Time</span>
+                      </div>
+                      <div class="flaw-stat-item flaw-stat-magenta">
+                        <span class="flaw-stat-num">12k</span>
+                        <span class="flaw-stat-label">Users</span>
+                      </div>
+                    </div>
+                    <div class="flaw-stat-row resolved-stat-row">
+                      <div class="resolved-stat-item bounce">
+                        <span class="resolved-stat-num text-red">84%</span>
+                        <span class="resolved-stat-label">Bounce Rate</span>
+                      </div>
+                      <div class="resolved-stat-item speed">
+                        <span class="resolved-stat-num text-green">2.1s</span>
+                        <span class="resolved-stat-label">Load Time</span>
+                      </div>
+                      <div class="resolved-stat-item users">
+                        <span class="resolved-stat-num text-blue">12k</span>
+                        <span class="resolved-stat-label">Active Users</span>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- Card 4: FLAW 10 (No visual grouping/hierarchy) -->
+                  <article class="dashboard-card chaos-card" id="chaosCard">
+                    <div class="hotspot-trigger" id="hotspot10" data-problem-id="10" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <div class="flawed-chaos-card-content">
+                      <span class="flaw-chaos-text">CLICK</span>
+                      <div class="flaw-chaos-box">Status: OK | Alerts: 99+ | Pending: ??? | Processing: loading… | Errors: check logs</div>
+                      <p class="flaw-chaos-tiny">last updated: never | version: unknown | region: all | type: general | category: misc</p>
+                      <button class="flaw-chaos-btn">DO THING</button>
+                      <button class="flaw-chaos-btn2">Also Do This</button>
+                      <button class="flaw-chaos-btn3">Or Maybe This</button>
+                    </div>
+                    <div class="resolved-chaos-card-content">
+                      <h4 class="card-title">System Status</h4>
+                      <div class="status-grid">
+                        <div class="status-cell">
+                          <span class="status-label">Network Sync</span>
+                          <span class="status-value success">Active</span>
+                        </div>
+                        <div class="status-cell">
+                          <span class="status-label">Pending Logs</span>
+                          <span class="status-value warning">0 alerts</span>
+                        </div>
+                      </div>
+                      <button class="btn-clean-primary">View Process Logs</button>
+                    </div>
+                  </article>
+
+                </div>
+
+                <!-- ROW 4: Transaction Table — FLAW 11, 12 -->
+                <div class="frame-table-section" id="tableSection">
+                  <div class="hotspot-trigger" id="hotspot11" data-problem-id="11" tabindex="0" role="button" aria-label="Click to inspect this area">
+                    <span class="hotspot-dot"></span>
+                  </div>
+                  <h4 class="flaw-table-title">Recent Transactions (data may not be accurate)</h4>
+                  <div class="flaw-table-wrap">
+                    <table class="flaw-table" id="flaw-table">
+                      <thead class="flawed-table-head">
+                        <tr>
+                          <th>DATE/TIME (UTC±0 approximate)</th>
+                          <th>TRANSACTION TYPE</th>
+                          <th>AMOUNT (USD)</th>
+                          <th>STATUS CODE</th>
+                          <th>REF#</th>
+                          <th>ACTION</th>
+                        </tr>
+                      </thead>
+                      <thead class="resolved-table-head">
+                        <tr>
+                          <th>Date & Time</th>
+                          <th>Type</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                          <th>Reference</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="flawed-table-body">
+                        <!-- FLAW 12: Alternating ugly row colors -->
+                        <tr class="flaw-row-a"><td>2024-01-15T08:23:14Z</td><td>Wire Transfer (Outgoing)</td><td>$1,240.00</td><td class="status-pending">PNDNG</td><td>TXN-884921</td><td><button class="flaw-action-btn">???</button></td></tr>
+                        <tr class="flaw-row-b"><td>2024-01-14T19:45:33Z</td><td>Direct Deposit</td><td>$3,800.00</td><td class="status-ok">CMPL</td><td>TXN-884900</td><td><button class="flaw-action-btn">???</button></td></tr>
+                        <tr class="flaw-row-a"><td>2024-01-13T12:01:00Z</td><td>Withdrawal</td><td>$500.00</td><td class="status-error">ERR-404</td><td>TXN-884877</td><td><button class="flaw-action-btn">???</button></td></tr>
+                        <tr class="flaw-row-b"><td>2024-01-12T06:30:55Z</td><td>Fee</td><td>$4.80</td><td class="status-ok">CMPL</td><td>TXN-884801</td><td><button class="flaw-action-btn">???</button></td></tr>
+                      </tbody>
+                      <tbody class="resolved-table-body">
+                        <tr class="good-row"><td>Jan 15, 2024 · 08:23</td><td>Wire Transfer (Outgoing)</td><td>$1,240.00</td><td><span class="badge-status pending">Pending</span></td><td>TXN-884921</td><td><button class="good-action-btn-styled">View Details</button></td></tr>
+                        <tr class="good-row"><td>Jan 14, 2024 · 19:45</td><td>Direct Deposit</td><td>$3,800.00</td><td><span class="badge-status success">Completed</span></td><td>TXN-884900</td><td><button class="good-action-btn-styled">View Details</button></td></tr>
+                        <tr class="good-row"><td>Jan 13, 2024 · 12:01</td><td>Withdrawal</td><td>$500.00</td><td><span class="badge-status error">Failed</span></td><td>TXN-884877</td><td><button class="good-action-btn-styled">View Details</button></td></tr>
+                        <tr class="good-row"><td>Jan 12, 2024 · 06:30</td><td>Fee</td><td>$4.80</td><td><span class="badge-status success">Completed</span></td><td>TXN-884801</td><td><button class="good-action-btn-styled">View Details</button></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="frame-form-section" id="formSection">
+                  <h4 class="flaw-section-title">User Settings</h4>
+                  <div class="flaw-form-grid">
+                    <!-- FLAW 13: No labels on form inputs -->
+                    <div class="hotspot-trigger" id="hotspot13" data-problem-id="13" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    
+                    <div class="form-field-group">
+                      <label class="flaw-form-label">Display Name</label>
+                      <input type="text" class="flaw-input" placeholder="Enter display name...">
+                    </div>
+                    
+                    <div class="form-field-group">
+                      <label class="flaw-form-label">Email Address</label>
+                      <input type="text" class="flaw-input" placeholder="Enter email address...">
+                    </div>
+                    
+                    <div class="form-field-group">
+                      <label class="flaw-form-label">Timezone</label>
+                      <input type="text" class="flaw-input" placeholder="Enter preferred timezone...">
+                    </div>
+                    
+                    <!-- FLAW 14: Form error in wrong color -->
+                    <div class="flaw-error-msg" id="flaw-form-error">
+                      <div class="hotspot-trigger inline" id="hotspot14" data-problem-id="14" tabindex="0" role="button" aria-label="Click to inspect this area">
+                        <span class="hotspot-dot small"></span>
+                      </div>
+                      <span class="error-msg-text">✓ Error: Invalid input. Please try again. Your data was not saved.</span>
+                    </div>
+
+                    <!-- FLAW 15: Submit vs Reset button confusion -->
+                    <div class="flaw-form-actions" id="flaw-form-actions">
+                      <div class="hotspot-trigger inline" id="hotspot15" data-problem-id="15" tabindex="0" role="button" aria-label="Click to inspect this area">
+                        <span class="hotspot-dot small"></span>
+                      </div>
+                      <button class="flaw-submit-btn">RESET ALL DATA</button>
+                      <button class="flaw-reset-btn">Save Changes</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ROW 6: Notification / Info Section — FLAW 16, 17 -->
+                <div class="frame-notif-section" id="notifSection">
+                  <!-- FLAW 16: Information overload -->
+                  <div class="flaw-notif-block flawed-notif-block" id="flaw-notif-block">
+                    <div class="hotspot-trigger" id="hotspot16" data-problem-id="16" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <div class="flaw-notif-item flaw-notif-error">🔴 CRITICAL: System alert level 3 detected in subsystem B. Immediate action may or may not be required.</div>
+                    <div class="flaw-notif-item flaw-notif-error">🔴 CRITICAL: Also see above alert. Duplicate notice for emphasis. Do not ignore.</div>
+                    <div class="flaw-notif-item flaw-notif-warning">🟡 WARNING: Your session might expire soon. Or not. Hard to say.</div>
+                    <div class="flaw-notif-item flaw-notif-error">🔴 CRITICAL: Network latency detected. This may not affect you.</div>
+                    <div class="flaw-notif-item flaw-notif-info">🔵 INFO: New features added. Check changelog v4.2.1-beta.</div>
+                    <div class="flaw-notif-item flaw-notif-warning">🟡 WARNING: Reminder to update your preferences (optional).</div>
+                    <div class="flaw-notif-item flaw-notif-success">🟢 SUCCESS: Your last action completed. Or failed. Unclear.</div>
+                  </div>
+                  <div class="flaw-notif-block resolved-notif-block">
+                    <div class="resolved-notif-item info">ℹ️ System update v4.2.1-beta was successfully installed.</div>
+                    <div class="resolved-notif-item warning">⚠️ Reminder: Please confirm your security preferences to prevent lockouts.</div>
+                  </div>
+
+                  <!-- FLAW 17: Inconsistent icon usage -->
+                  <div class="flaw-icon-row flawed-icon-row" id="flaw-icon-row">
+                    <div class="hotspot-trigger" id="hotspot17" data-problem-id="17" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <div class="flaw-icon-item">📁 Delete File</div>
+                    <div class="flaw-icon-item">🗑️ New Folder</div>
+                    <div class="flaw-icon-item">➕ Undo Action</div>
+                    <div class="flaw-icon-item">🔄 Stop Process</div>
+                    <div class="flaw-icon-item">⏹ Refresh Data</div>
+                  </div>
+                  <div class="flaw-icon-row resolved-icon-row">
+                    <div class="resolved-icon-item">🗑️ Delete File</div>
+                    <div class="resolved-icon-item">📁 New Folder</div>
+                    <div class="resolved-icon-item">🔄 Undo Action</div>
+                    <div class="resolved-icon-item">⏹ Stop Process</div>
+                    <div class="resolved-icon-item">🔄 Refresh Data</div>
+                  </div>
+                </div>
+
+                <!-- ROW 7: Progress / Chart Section — FLAW 18, 19 -->
+                <div class="frame-chart-section" id="chartSection">
+
+                  <!-- FLAW 18: Progress bars with no labels -->
+                  <div class="flaw-progress-block flawed-progress-block" id="flaw-progress-block">
+                    <div class="hotspot-trigger" id="hotspot18" data-problem-id="18" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="flaw-section-title">Metrics</h4>
+                    <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 84%; background: #ff0000;"></div></div>
+                    <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 23%; background: #00ff00;"></div></div>
+                    <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 61%; background: #0000ff;"></div></div>
+                    <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 47%; background: #ff00ff;"></div></div>
+                  </div>
+                  <div class="flaw-progress-block resolved-progress-block">
+                    <h4 class="flaw-section-title">System Allocation</h4>
+                    <div class="resolved-progress-item">
+                      <div class="progress-info"><span>API Usage Limit</span><span>84%</span></div>
+                      <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 84%;"></div></div>
+                    </div>
+                    <div class="resolved-progress-item">
+                      <div class="progress-info"><span>Memory Load</span><span>23%</span></div>
+                      <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 23%;"></div></div>
+                    </div>
+                    <div class="resolved-progress-item">
+                      <div class="progress-info"><span>Database Pools</span><span>61%</span></div>
+                      <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 61%;"></div></div>
+                    </div>
+                    <div class="resolved-progress-item">
+                      <div class="progress-info"><span>Network IO</span><span>47%</span></div>
+                      <div class="flaw-progress-row"><div class="flaw-progress-bar" style="width: 47%;"></div></div>
+                    </div>
+                  </div>
+
+                  <!-- FLAW 19: Pie chart with no legend -->
+                  <div class="flaw-pie-block flawed-pie-block" id="flaw-pie-block">
+                    <div class="hotspot-trigger" id="hotspot19" data-problem-id="19" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <div class="flaw-pie-chart">
+                      <div class="flaw-pie-slice" style="--slice-pct: 35; --slice-color: #e74c3c;"></div>
+                      <div class="flaw-pie-label">?</div>
+                    </div>
+                    <p class="flaw-pie-caption">Chart (see data for details)</p>
+                  </div>
+                  <div class="flaw-pie-block resolved-pie-block">
+                    <h4 class="flaw-section-title">Asset Allocation</h4>
+                    <div class="resolved-pie-content">
+                      <div class="flaw-pie-chart">
+                        <div class="flaw-pie-slice slice-primary" style="--slice-pct: 60; --slice-color: var(--accent-primary);"></div>
+                        <div class="flaw-pie-slice slice-secondary" style="--slice-pct: 25; --slice-color: var(--accent-secondary);"></div>
+                        <div class="flaw-pie-slice slice-tertiary" style="--slice-pct: 15; --slice-color: var(--accent-success);"></div>
+                      </div>
+                      <div class="resolved-pie-legend">
+                        <div class="legend-item"><span class="legend-dot primary"></span> Cash (60%)</div>
+                        <div class="legend-item"><span class="legend-dot secondary"></span> Stocks (25%)</div>
+                        <div class="legend-item"><span class="legend-dot tertiary"></span> Bonds (15%)</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ROW 8: Accessibility & Misc Issues — FLAW 20, 21, 22, 23, 24, 25 -->
+                <div class="frame-misc-section" id="miscSection">
+
+                  <!-- FLAW 20: No focus indicators -->
+                  <div class="flaw-nofocus-block" id="flaw-nofocus-block">
+                    <div class="hotspot-trigger" id="hotspot20" data-problem-id="20" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="flaw-section-title">Support Panel</h4>
+                    <button class="flaw-nofocus-btn">Contact Support</button>
+                    <button class="flaw-nofocus-btn">View FAQ</button>
+                    <button class="flaw-nofocus-btn">Open Ticket</button>
+                  </div>
+
+                  <!-- FLAW 21: Links that look like buttons and buttons that look like links -->
+                  <div class="flaw-linkbtn-block" id="flaw-linkbtn-block">
+                    <div class="hotspot-trigger" id="hotspot21" data-problem-id="21" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="flaw-section-title">Quick Links</h4>
+                    <div class="flaw-linkbtn-row flawed-linkbtn-row">
+                      <button class="flaw-fake-link">Go to Settings</button>
+                      <a class="flaw-fake-btn" href="#" onclick="return false;">Click to Navigate</a>
+                      <button class="flaw-fake-link">View Profile</button>
+                      <a class="flaw-fake-btn" href="#" onclick="return false;">Submit Form</a>
+                    </div>
+                    <div class="flaw-linkbtn-row resolved-linkbtn-row">
+                      <a class="resolved-real-link" href="#" onclick="return false;">Go to Settings</a>
+                      <button class="resolved-real-btn">Click to Navigate</button>
+                      <a class="resolved-real-link" href="#" onclick="return false;">View Profile</a>
+                      <button class="resolved-real-btn">Submit Form</button>
+                    </div>
+                  </div>
+
+                  <!-- FLAW 22: Terrible line length / text justified -->
+                  <div class="flaw-text-block" id="flaw-text-block">
+                    <div class="hotspot-trigger" id="hotspot22" data-problem-id="22" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <p class="flaw-long-text">Terms of Service: By using this application you agree to all terms and conditions stated herein and in all annexes thereof including but not limited to the privacy policy, data processing agreement, cookie notice, and any future amendments which shall be considered automatically accepted upon continued use of this platform without any further notification requirement on our part.</p>
+                  </div>
+
+                  <!-- FLAW 23: Images without alt text placeholder -->
+                  <div class="flaw-img-block" id="flaw-img-block">
+                    <div class="hotspot-trigger" id="hotspot23" data-problem-id="23" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <div class="flaw-img-block-inner flawed-img-block-inner">
+                      <div class="flaw-broken-img" role="img"></div>
+                      <div class="flaw-broken-img" role="img"></div>
+                      <div class="flaw-broken-img" role="img"></div>
+                    </div>
+                    <div class="flaw-img-block-inner resolved-img-block-inner">
+                      <div class="flaw-broken-img" role="img" aria-label="System status graph showing active response threads."></div>
+                      <div class="flaw-broken-img" role="img" aria-label="Weekly expense breakdown."></div>
+                      <div class="flaw-broken-img" role="img" aria-label="Total volume asset growth logs."></div>
+                    </div>
+                  </div>
+
+                  <!-- FLAW 24: Hover-only critical information -->
+                  <div class="flaw-hover-block" id="flaw-hover-block">
+                    <div class="hotspot-trigger" id="hotspot24" data-problem-id="24" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="flaw-section-title">Account Balance</h4>
+                    <div class="flaw-hover-value-wrap flawed-hover-value-wrap">
+                      <div class="flaw-hover-value">Hover to see balance</div>
+                      <div class="flaw-hover-tooltip">$12,430.55</div>
+                    </div>
+                    <div class="flaw-hover-value-wrap resolved-hover-value-wrap">
+                      <div class="resolved-balance-display">$12,430.55</div>
+                    </div>
+                  </div>
+
+                  <!-- FLAW 25: Mobile-hostile / no responsive design -->
+                  <div class="flaw-fixed-block" id="flaw-fixed-block">
+                    <div class="hotspot-trigger" id="hotspot25" data-problem-id="25" tabindex="0" role="button" aria-label="Click to inspect this area">
+                      <span class="hotspot-dot"></span>
+                    </div>
+                    <h4 class="flaw-section-title">Document Upload</h4>
+                    <div class="flaw-fixed-row flawed-fixed-row">
+                      <input type="text" class="flaw-input flaw-input-fixed" placeholder="Fixed 800px wide element — causes horizontal scroll on mobile" style="width:800px; min-width:800px;">
+                      <button class="flaw-nofocus-btn">Upload</button>
+                    </div>
+                    <div class="flaw-fixed-row resolved-fixed-row">
+                      <input type="text" class="flaw-input flaw-input-responsive" placeholder="Enter document description...">
+                      <button class="good-upload-btn">Upload</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- end app-frame-body -->
+            </div><!-- end preview-app-container -->
+          </div><!-- end workspace-viewport -->
+        </div><!-- end detective-layout -->
+      </div>
+    </section>
+
+    <!-- DISCOVERY MODAL -->
+    <div class="detective-modal" id="detectiveModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-card discovery-card">
+        <div class="modal-header">
+          <span class="modal-badge discovery-badge" id="modalBadge">Observation</span>
+          <button class="modal-close-btn" id="closeModalBtn" aria-label="Close details dialog">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="discovery-icon-wrap" aria-hidden="true">🔍</div>
+          <h3 class="modal-title" id="modalTitle">Interesting observation.</h3>
+          <p class="modal-discovery-desc" id="modalFlawExplain"></p>
+          <p id="modalFixExplain" style="display:none;"></p>
+          <p id="modalPrincipleText" style="display:none;"></p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modalCancelBtn">Dismiss</button>
+          <button class="btn btn-primary ripple" id="modalFixBtn">
+            <span>Apply the Fix</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. INTERACTIVE DESIGN LAB -->
+    <section id="lab-section" class="lab-section scroll-reveal" aria-label="Interactive Design Lab">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Sandbox</span>
+          <h2 class="section-title">Interactive Design Lab</h2>
+          <p class="section-desc">
+            Adjust core design variables and see how each decision affects readability, accessibility, and hierarchy in real time.
+          </p>
+        </div>
+
+        <div class="lab-layout">
+          <!-- Sliders and Inputs Panel -->
+          <div class="lab-controls-panel">
+            <h3>Design Tokens</h3>
+            
+            <div class="lab-control-item">
+              <div class="control-header">
+                <span class="control-title">Body Font Size</span>
+                <span class="control-value" id="valFontSize">12px</span>
+              </div>
+              <input type="range" id="sliderFontSize" min="10" max="22" value="12" step="1" aria-label="Adjust font size">
+              <span class="control-description">Sizing below 14px triggers WCAG advisory warnings.</span>
+            </div>
+
+            <div class="lab-control-item">
+              <div class="control-header">
+                <span class="control-title">Color Contrast</span>
+                <span class="control-value" id="valContrast">Low Contrast</span>
+              </div>
+              <input type="range" id="sliderContrast" min="1" max="4" value="1" step="1" aria-label="Adjust color contrast">
+              <span class="control-description">Text below 4.5:1 contrast fails WCAG AA standards.</span>
+            </div>
+
+            <div class="lab-control-item">
+              <div class="control-header">
+                <span class="control-title">Component Spacing</span>
+                <span class="control-value" id="valSpacing">8px</span>
+              </div>
+              <input type="range" id="sliderSpacing" min="4" max="32" value="8" step="4" aria-label="Adjust spacing">
+              <span class="control-description">Generous margins reduce cognitive load and visual clutter.</span>
+            </div>
+
+            <div class="lab-control-item">
+              <div class="control-header">
+                <span class="control-title">Layout Density</span>
+                <span class="control-value" id="valDensity">Tight</span>
+              </div>
+              <input type="range" id="sliderDensity" min="1" max="3" value="1" step="1" aria-label="Adjust layout density">
+              <span class="control-description">Line height and grid spacing shape how content breathes.</span>
+            </div>
+          </div>
+
+          <!-- Real-time Preview & Metrics Card -->
+          <div class="lab-preview-panel">
+            
+            <!-- Real-time Calculated UX Scores -->
+            <div class="lab-metrics-grid">
+              
+              <div class="metric-card">
+                <div class="metric-radial">
+                  <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                    <path class="circle-fill" id="metricCircleAccess" stroke-dasharray="45, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                  </svg>
+                  <span class="metric-number" id="lblMetricAccess">45</span>
+                </div>
+                <span class="metric-name">Accessibility</span>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-radial">
+                  <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                    <path class="circle-fill" id="metricCircleRead" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                  </svg>
+                  <span class="metric-number" id="lblMetricRead">35</span>
+                </div>
+                <span class="metric-name">Readability</span>
+              </div>
+
+              <div class="metric-card">
+                <div class="metric-radial">
+                  <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                    <path class="circle-fill" id="metricCircleHierarchy" stroke-dasharray="50, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                  </svg>
+                  <span class="metric-number" id="lblMetricHierarchy">50</span>
+                </div>
+                <span class="metric-name">Visual Hierarchy</span>
+              </div>
+
+            </div>
+
+            <!-- Dynamic Sandbox Preview Card -->
+            <div class="lab-card-preview" id="labCardPreview">
+              <span class="preview-badge">Sandbox Output</span>
+              
+              <div class="lab-card-content">
+                <div class="lab-card-header">
+                  <div class="lab-card-avatar" aria-hidden="true">JD</div>
+                  <div class="lab-card-author">
+                    <h4>Jonathan Doe</h4>
+                    <span class="post-time">Posted 2 hours ago</span>
+                  </div>
+                </div>
+                
+                <h3 class="lab-card-title">Sustainable Infrastructure Trends</h3>
+                
+                <p class="lab-card-body">
+                  Modern application grids leverage modular variable properties to dynamically adapt to varying client constraints. As font scales increase and spacing is padded, reading accessibility climbs rapidly.
+                </p>
+
+                <div class="lab-card-tags">
+                  <span class="lab-tag">#UXResearch</span>
+                  <span class="lab-tag">#DesignTokens</span>
+                </div>
+
+                <div class="lab-card-actions">
+                  <button class="btn btn-secondary btn-small">Save Post</button>
+                  <button class="btn btn-primary btn-small">Read More</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WIREFRAME TO REALITY SECTION -->
+    <section id="wireframe-section" class="wireframe-section scroll-reveal" aria-label="Design Evolution">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Design Evolution</span>
+          <h2 class="section-title">Wireframe to Reality</h2>
+          <p class="section-desc">
+            Toggle between basic wireframe blueprints and final designs — see how styling transforms bare structure.
+          </p>
+        </div>
+
+        <!-- Mode Toggle Controller -->
+        <div class="wireframe-toggle-container">
+          <div class="toggle-bar">
+            <button class="toggle-mode-btn active" id="btnWireframeMode">Wireframe Mode</button>
+            <button class="toggle-mode-btn" id="btnFinalMode">Final Design Mode</button>
+            <span class="toggle-active-bg"></span>
+          </div>
+        </div>
+
+        <!-- Interactive Transforming Layout Frame -->
+        <div class="wireframe-canvas wireframe-active" id="wireframeCanvas">
+          
+          <div class="wireframe-widget">
+            
+            <div class="widget-sidebar">
+              <div class="sidebar-logo">
+                <div class="box-placeholder wireframe-box"><span class="wireframe-text">LOGO</span></div>
+              </div>
+              <ul class="sidebar-links">
+                <li><div class="line-placeholder wireframe-line w-80"></div></li>
+                <li><div class="line-placeholder wireframe-line w-60"></div></li>
+                <li><div class="line-placeholder wireframe-line w-70"></div></li>
+                <li><div class="line-placeholder wireframe-line w-50"></div></li>
+              </ul>
+            </div>
+
+            <div class="widget-content">
+              <header class="widget-header">
+                <div class="header-search">
+                  <div class="box-placeholder wireframe-box w-150"><span class="wireframe-text">Search...</span></div>
+                </div>
+                <div class="header-profile">
+                  <div class="circle-placeholder wireframe-circle"></div>
+                  <div class="line-placeholder wireframe-line w-60"></div>
+                </div>
+              </header>
+
+              <div class="widget-body">
+                
+                <div class="analytics-row">
+                  <div class="analytics-card main-chart-card">
+                    <div class="card-details">
+                      <div class="line-placeholder wireframe-line w-120 h-16"></div>
+                      <div class="line-placeholder wireframe-line w-80"></div>
+                    </div>
+                    <div class="chart-illustration">
+                      <div class="chart-bars-container">
+                        <div class="chart-bar-item" style="--val: 30%"></div>
+                        <div class="chart-bar-item" style="--val: 55%"></div>
+                        <div class="chart-bar-item" style="--val: 40%"></div>
+                        <div class="chart-bar-item" style="--val: 85%"></div>
+                        <div class="chart-bar-item" style="--val: 60%"></div>
+                        <div class="chart-bar-item" style="--val: 70%"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="analytics-card info-card">
+                    <div class="circle-placeholder wireframe-circle large"></div>
+                    <div class="line-placeholder wireframe-line w-100 h-16"></div>
+                    <div class="line-placeholder wireframe-line w-60"></div>
+                  </div>
+                </div>
+
+                <div class="content-table-card">
+                  <div class="line-placeholder wireframe-line w-150 h-16 mb-16"></div>
+                  <div class="table-rows">
+                    <div class="table-row-item">
+                      <div class="circle-placeholder wireframe-circle"></div>
+                      <div class="line-placeholder wireframe-line w-120"></div>
+                      <div class="line-placeholder wireframe-line w-60 ml-auto"></div>
+                    </div>
+                    <div class="table-row-item">
+                      <div class="circle-placeholder wireframe-circle"></div>
+                      <div class="line-placeholder wireframe-line w-90"></div>
+                      <div class="line-placeholder wireframe-line w-75 ml-auto"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. UX RESEARCH SECTION -->
+    <section id="research-section" class="research-section scroll-reveal" aria-label="Research Insights">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Behind the Problems</h2>
+          <p class="section-desc">
+            Real user research reveals why these hidden issues matter far more than they appear.
+          </p>
+        </div>
+
+        <div class="research-grid">
+          
+          <article class="research-card">
+            <div class="card-icon-wrapper goals">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>What Users Wanted</h3>
+            <p class="research-highlight">Fast paths. Obvious actions. Zero friction.</p>
+            <p class="research-details">Users abandon tasks when interfaces demand extra effort. Every second of confusion costs trust.</p>
+          </article>
+
+          <article class="research-card">
+            <div class="card-icon-wrapper pain-points">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
+            <h3>What Frustrated Them</h3>
+            <p class="research-highlight">Low contrast. Tiny targets. Confusing labels.</p>
+            <p class="research-details">68% of drop-offs in similar prototypes trace to readability and interaction failures — not missing features.</p>
+          </article>
+
+          <article class="research-card">
+            <div class="card-icon-wrapper frustrations">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><circle cx="12" cy="12" r="10"></circle><path d="M16 16s-1.5-2-4-2-4 2-4 2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            </div>
+            <h3>Where They Gave Up</h3>
+            <p class="research-highlight">Broken navigation. No clear next step.</p>
+            <p class="research-details">When menus are confusing, users don't complain — they leave. Bounce rates climb silently.</p>
+          </article>
+
+          <article class="research-card">
+            <div class="card-icon-wrapper opportunities">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>What Could Be Different</h3>
+            <p class="research-highlight">Better spacing. Clearer hierarchy. Accessible colors.</p>
+            <p class="research-details">Small, deliberate design decisions compound into dramatically better experiences that users trust.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. DESIGN DECISIONS SECTION -->
+    <section id="decisions-section" class="decisions-section scroll-reveal" aria-label="Core UX Principles">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Core Design Principles</h2>
+          <p class="section-desc">
+            Hover each card to feel the principle in action — no explanation needed.
+          </p>
+        </div>
+
+        <div class="decisions-grid">
+          
+          <div class="decision-card" id="decCardSpacing" tabindex="0">
+            <div class="card-interactive-demo spacing-grid">
+              <div class="spacing-box flex-center">
+                <span>Margin Area</span>
+                <div class="inner-spacing-box flex-center">
+                  <span>Padding Area</span>
+                  <div class="inner-content-box">Content</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Spacing Matters</h3>
+              <p>Whitespace isn't empty — it's structure. Without it, content overwhelms.</p>
+            </div>
+          </div>
+
+          <div class="decision-card" id="decCardContrast" tabindex="0">
+            <div class="card-interactive-demo contrast-tester">
+              <div class="test-row pass">
+                <span class="test-status-badge">PASS</span>
+                <span class="test-text">Accessible (4.5:1 ratio)</span>
+              </div>
+              <div class="test-row fail">
+                <span class="test-status-badge">FAIL</span>
+                <span class="test-text">Poor Contrast (1.8:1 ratio)</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Contrast Matters</h3>
+              <p>Text below 4.5:1 locks out users with visual impairments — and everyone in bright light.</p>
+            </div>
+          </div>
+
+          <div class="decision-card" id="decCardTypography" tabindex="0">
+            <div class="card-interactive-demo typography-scale">
+              <h1 class="scale-h1">Heading 1 (32px)</h1>
+              <h2 class="scale-h2">Heading 2 (24px)</h2>
+              <p class="scale-p">Body Text (16px)</p>
+            </div>
+            <div class="card-content">
+              <h3>Typography Matters</h3>
+              <p>A consistent type scale guides the eye before the reader processes a single word.</p>
+            </div>
+          </div>
+
+          <div class="decision-card" id="decCardHierarchy" tabindex="0">
+            <div class="card-interactive-demo visual-hierarchy-flow">
+              <div class="flow-item num-1">
+                <span class="flow-num">1</span>
+                <span>Primary Focal Point</span>
+              </div>
+              <div class="flow-item num-2">
+                <span class="flow-num">2</span>
+                <span>Secondary Detail</span>
+              </div>
+              <div class="flow-item num-3">
+                <span class="flow-num">3</span>
+                <span>Supporting Metadata</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Hierarchy Matters</h3>
+              <p>When everything looks equal, nothing stands out. Visual weight tells users where to look first.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. RESPONSIVE DESIGN SHOWCASE -->
+    <section id="responsive-section" class="responsive-section scroll-reveal" aria-label="Responsive Design">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Responsive Mechanics</span>
+          <h2 class="section-title">Responsive Design Showcase</h2>
+          <p class="section-desc">
+            Emulate how layouts restructure across different screen sizes — not just scale.
+          </p>
+        </div>
+
+        <!-- Device Selector Bar -->
+        <div class="device-selector-bar">
+          <button class="device-btn active" id="btnDeviceDesktop" data-device="desktop">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Desktop (100%)</span>
+          </button>
+          <button class="device-btn" id="btnDeviceTablet" data-device="tablet">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            <span>Tablet (768px)</span>
+          </button>
+          <button class="device-btn" id="btnDeviceMobile" data-device="mobile">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-icon"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            <span>Mobile (375px)</span>
+          </button>
+        </div>
+
+        <!-- Emulator Container -->
+        <div class="emulator-wrapper">
+          <div class="device-mock-container" id="deviceMockFrame">
+            <div class="mock-frame-bar">
+              <span class="mock-camera"></span>
+              <span class="mock-speaker"></span>
+            </div>
+            
+            <div class="device-viewport-content">
+              
+              <div class="responsive-demo-grid">
+                
+                <header class="demo-grid-header">
+                  <div class="demo-logo">⚙ DevConsole</div>
+                  <nav class="demo-nav">
+                    <span>Overview</span>
+                    <span>Analytics</span>
+                    <span>Tokens</span>
+                  </nav>
+                </header>
+
+                <main class="demo-grid-main">
+                  
+                  <div class="demo-card hero-grid-card">
+                    <h3>Adaptive Layouts</h3>
+                    <p>On large screens, columns sit side-by-side. On mobile, items wrap vertically, keeping interactions unified.</p>
+                  </div>
+
+                  <div class="demo-stats-grid">
+                    <div class="demo-card stat-sub-card">
+                      <span class="stat-label">Active Users</span>
+                      <span class="stat-val">12.4k</span>
+                    </div>
+                    <div class="demo-card stat-sub-card">
+                      <span class="stat-label">Success Rate</span>
+                      <span class="stat-val">99.8%</span>
+                    </div>
+                  </div>
+
+                  <div class="demo-card list-grid-card">
+                    <h4>Activity Log</h4>
+                    <ul class="activity-items">
+                      <li>
+                        <span class="time">12:04</span>
+                        <span class="log">Spacing system updated</span>
+                      </li>
+                      <li>
+                        <span class="time">11:58</span>
+                        <span class="log">Contrast verified WCAG Pass</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                </main>
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Design Explorer Side Panel -->
+  <button class="design-explorer-trigger" id="explorerTriggerBtn" aria-label="Open Design Process Log" aria-haspopup="true" aria-expanded="false">
+    <div class="trigger-content">
+      <span class="trigger-icon">📓</span>
+      <span class="trigger-label">Process Log</span>
+    </div>
+  </button>
+
+  <aside class="design-explorer-drawer" id="explorerDrawer" role="dialog" aria-modal="true" aria-label="Design Process Log" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-header-title">
+        <span class="drawer-badge">Notebook</span>
+        <h3>Design Process</h3>
+      </div>
+      <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close Design Explorer Panel">&times;</button>
+    </div>
+    
+    <div class="drawer-body">
+      
+      <div class="drawer-intro">
+        <p>How this mystery was constructed — the design thinking behind the experience.</p>
+      </div>
+
+      <div class="timeline-stages">
+        
+        <div class="timeline-item">
+          <div class="timeline-marker">1</div>
+          <div class="timeline-content">
+            <h4>Research</h4>
+            <p>User surveys identified 25 core interaction failures responsible for 68% of drop-offs in similar prototypes.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">2</div>
+          <div class="timeline-content">
+            <h4>Problem Identification</h4>
+            <p>Flagged violations of Fitts's Law, WCAG contrast, and Information Architecture principles.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">3</div>
+          <div class="timeline-content">
+            <h4>Wireframing</h4>
+            <p>Structural scaffolding isolated from color — checking logic flow before adding visual styling.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">4</div>
+          <div class="timeline-content">
+            <h4>Design Tokens</h4>
+            <p>CSS Custom Properties for typography, spacing, and color — powering the live transformation system.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">5</div>
+          <div class="timeline-content">
+            <h4>Accessibility Audit</h4>
+            <p>Semantic HTML, contrast rules, keyboard navigation, and ARIA markers verified throughout.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker">6</div>
+          <div class="timeline-content">
+            <h4>Development</h4>
+            <p>Native HTML5, CSS Grid, Vanilla JS — no frameworks. Fast, lightweight, and portable.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </aside>
+
+  <!-- CASE CLOSED: FINAL CELEBRATION & BEFORE/AFTER COMPARISON -->
+  <div class="celebration-overlay" id="celebrationOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+    
+    <div class="celebration-card">
+      <span class="celebration-badge">🔍 Case Closed</span>
+      <h2 class="celebration-title">You cracked it.</h2>
+      <p class="celebration-text">
+        You successfully transformed a catastrophic experience into a delightful one.
+        <span class="celebration-sub">Most visitors never find all 25 problems.</span>
+      </p>
+
+      <!-- Metric Improvement Badges -->
+      <div class="celebration-metrics">
+        <div class="metric-badge-card">
+          <span class="metric-badge-icon">📖</span>
+          <span class="metric-badge-name">Readability</span>
+          <span class="metric-badge-val">↑ Improved</span>
+        </div>
+        <div class="metric-badge-card">
+          <span class="metric-badge-icon">♿</span>
+          <span class="metric-badge-name">Accessibility</span>
+          <span class="metric-badge-val">↑ Improved</span>
+        </div>
+        <div class="metric-badge-card">
+          <span class="metric-badge-icon">🧭</span>
+          <span class="metric-badge-name">Navigation</span>
+          <span class="metric-badge-val">↑ Improved</span>
+        </div>
+        <div class="metric-badge-card">
+          <span class="metric-badge-icon">✨</span>
+          <span class="metric-badge-name">UX Score</span>
+          <span class="metric-badge-val">10 → 100</span>
+        </div>
+      </div>
+
+      <!-- Before / After full comparison -->
+      <div class="before-after-section">
+        <h3 class="before-after-title">See The Transformation</h3>
+        <p class="before-after-subtitle">Drag the divider to compare the original disaster to the polished design</p>
+
+        <div class="comparison-slider-wrapper">
+          <div class="comparison-labels">
+            <span class="comparison-label bad-label">😱 BEFORE (Catastrophic)</span>
+            <span class="comparison-label good-label">✨ AFTER (Professional)</span>
+          </div>
+          
+          <div class="comparison-container" id="sliderContainer">
+            
+            <!-- Bottom Layer: Reformed (AFTER - Professional) -->
+            <div class="comparison-layer reformed-layer">
+              <div class="dummy-app-preview good-preview">
+                <div class="good-app-header">
+                  <span class="good-logo">❖ FinFlow</span>
+                  <nav class="good-nav">
+                    <a href="#" onclick="return false;">Overview</a>
+                    <a href="#" onclick="return false;">Reports</a>
+                    <a href="#" onclick="return false;">Analytics</a>
+                    <a href="#" onclick="return false;">Settings</a>
+                  </nav>
+                  <div class="good-header-actions">
+                    <button class="good-notif-btn">🔔 <span class="notif-badge">3</span></button>
+                    <button class="good-profile-btn">👤 Profile</button>
+                  </div>
+                </div>
+                <div class="good-app-body">
+                  <div class="good-welcome">
+                    <h3>Transaction Dashboard</h3>
+                    <p>Monitor your finances, track expenses, and manage transfers with ease.</p>
+                  </div>
+                  <div class="good-stats-row">
+                    <div class="good-stat-card">
+                      <span class="good-stat-label">Total Balance</span>
+                      <span class="good-stat-val">$12,430.55</span>
+                      <span class="good-stat-change positive">↑ +8.2% this month</span>
+                    </div>
+                    <div class="good-stat-card">
+                      <span class="good-stat-label">Monthly Expenses</span>
+                      <span class="good-stat-val">$4,500.00</span>
+                      <span class="good-stat-change negative">↓ -3.1% vs last month</span>
+                    </div>
+                    <div class="good-stat-card">
+                      <span class="good-stat-label">Pending Transfers</span>
+                      <span class="good-stat-val">3</span>
+                      <span class="good-stat-change neutral">Requires review</span>
+                    </div>
+                  </div>
+                  <div class="good-action-row">
+                    <div class="good-transfer-card">
+                      <h4>Quick Transfer</h4>
+                      <p>Send funds securely to any account</p>
+                      <input type="text" class="good-input" placeholder="Recipient account number" readonly value="0x89D2...4F6A">
+                      <div class="good-btn-row">
+                        <button class="good-btn-secondary">Cancel</button>
+                        <button class="good-btn-primary">Validate & Send Token</button>
+                      </div>
+                    </div>
+                    <div class="good-notifications">
+                      <h4>Notifications</h4>
+                      <div class="good-notif-item success-notif">✓ Transfer completed successfully</div>
+                      <div class="good-notif-item info-notif">ℹ New features available in v4.2</div>
+                      <div class="good-notif-item warning-notif">⚠ Session expires in 25 minutes</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Layer: Flawed (BEFORE - Terrible) -->
+            <div class="comparison-layer flawed-layer" id="flawedLayer">
+              <div class="dummy-app-preview bad-preview">
+                <div class="bad-app-header">
+                  <span class="bad-logo">❖ FinFlow</span>
+                  <span class="bad-nav">Overview Rptz ?? Sttngs ClickMe N/A</span>
+                </div>
+                <div class="bad-app-body">
+                  <div class="bad-alert">⚠ CRITICAL URGENT IMPORTANT WARNING ERROR NOTICE: Your session may expire. Also your account needs attention. Also there is a new update. Also review policy. Also check notifications.</div>
+                  <h3 class="bad-title">User Account Portal Dashboard Info Management Center Home Page Overview</h3>
+                  <p class="bad-body-text">Welcome to FinFlow. This application allows users to check transactions, monitor expenses, track budget limits... Also please read the terms. Also check back daily. Also enable 2FA. Also verify your email.</p>
+                  <div class="bad-btn-row">
+                    <button class="bad-cancel-btn">CANCEL THIS ACTION IMMEDIATELY</button>
+                    <button class="bad-cta-btn">v</button>
+                  </div>
+                  <div class="bad-chaos">
+                    <span class="bad-chaos-text">CLICK</span>
+                    <div class="bad-chaos-box">Status: OK | Alerts: 99+ | Pending: ??? | Errors: check logs</div>
+                  </div>
+                  <div class="bad-notifs">
+                    <div class="bad-notif bad-notif-err">🔴 CRITICAL: System alert detected. Action may be required.</div>
+                    <div class="bad-notif bad-notif-err">🔴 CRITICAL: Duplicate notice. Do not ignore.</div>
+                    <div class="bad-notif bad-notif-warn">🟡 WARNING: Session might expire. Or not. Hard to say.</div>
+                    <div class="bad-notif bad-notif-ok">🟢 SUCCESS: Your last action completed. Or failed. Unclear.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slider Handle -->
+            <div class="slider-handle" id="sliderHandle">
+              <div class="handle-line"></div>
+              <div class="handle-button">
+                <span class="handle-arrow left">&larr;</span>
+                <span class="handle-arrow right">&rarr;</span>
+              </div>
+              <div class="handle-line"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="celebration-actions">
+        <button class="btn btn-secondary" id="replayBtn">Play Again</button>
+        <button class="btn btn-primary ripple" id="continueExploringBtn">Keep Exploring</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discovery Toast Notification -->
+  <div class="discovery-toast" id="discoveryToast" aria-live="polite" aria-atomic="true">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage">Something improved.</span>
+  </div>
+
+  <!-- Screen Reader Assist Caption Alert Box -->
+  <div class="sr-assist-captions" id="srCaptionsBox" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Interactive UX Mystery — Portfolio Submission.</p>
+      <p>Built with HTML5, CSS3, and Vanilla JavaScript. No frameworks.</p>
+    </div>
+  </footer>
+
+  <!-- Core Javascript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
