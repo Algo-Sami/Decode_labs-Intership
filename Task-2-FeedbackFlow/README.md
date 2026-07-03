@@ -191,7 +191,22 @@ To run the automated tests against all API endpoints (boots a mock server, invok
 ```bash
 node test.js
 ```
+# Task 2 - FeedbackFlow
 
+A feedback collection web application built using Node.js and Express.
+
+## Features
+- Submit feedback
+- View feedback
+- REST API
+- Input validation
+- Logging middleware
+
+## Live Demo
+https://decode-labs-intership.vercel.app/
+
+## GitHub Repository
+https://github.com/Algo-Sami/Decode_labs-Intership
 ---
 
 ## Future Improvements
