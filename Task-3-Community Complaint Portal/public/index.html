@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Community Complaint Portal - File, track, and manage public community issues in your neighborhood.">
+  <title>CivicConnect - Community Complaint Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Vanilla CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="nav-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-building-shield"></i>
+        </div>
+        <span>CivicConnect</span>
+      </a>
+      <div class="nav-links">
+        <a href="#dashboard" class="nav-link"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+        <a href="#complaints" class="nav-link"><i class="fa-solid fa-list-check"></i> Complaints</a>
+        <button class="btn btn-primary" id="btn-open-lodge-modal">
+          <i class="fa-solid fa-plus"></i> File Complaint
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge"><i class="fa-solid fa-bullhorn"></i> Empowering Communities</span>
+        <h1 class="hero-title">Better Neighborhoods, <br>Together.</h1>
+        <p class="hero-subtitle">
+          Voice your concerns, report issues like broken streetlights, road damage, or water leaks, and track resolution in real-time. We help you connect directly with maintenance services.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-hero btn-lg" id="btn-hero-lodge">
+            Report an Issue <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <a href="#complaints" class="btn btn-hero-secondary btn-lg">
+            Track Issues <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <div class="glass-card hero-widget">
+          <div class="widget-header">
+            <span class="widget-dot red"></span>
+            <span class="widget-dot yellow"></span>
+            <span class="widget-dot green"></span>
+          </div>
+          <div class="widget-body">
+            <div class="widget-item">
+              <div class="widget-icon success"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="widget-text">
+                <span class="widget-label">Resolved Issue</span>
+                <span class="widget-val">Street Light Repaired</span>
+              </div>
+            </div>
+            <div class="widget-item">
+              <div class="widget-icon warning"><i class="fa-solid fa-spinner"></i></div>
+              <div class="widget-text">
+                <span class="widget-label">In Progress</span>
+                <span class="widget-val">Main Street Potholes</span>
+              </div>
+            </div>
+            <div class="widget-item">
+              <div class="widget-icon danger"><i class="fa-solid fa-exclamation-circle"></i></div>
+              <div class="widget-text">
+                <span class="widget-label">High Priority</span>
+                <span class="widget-val">Water Pipe Burst</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Portal Overview</h2>
+          <p class="section-desc">Key performance and tracking statistics for reported community issues.</p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <!-- Card 1: Total Complaints -->
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper total">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value" id="stats-total">0</h3>
+            <p class="stat-label">Total Complaints</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Pending -->
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper pending">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value" id="stats-pending">0</h3>
+            <p class="stat-label">Pending Review</p>
+          </div>
+        </div>
+
+        <!-- Card 3: In Progress -->
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper in-progress">
+            <i class="fa-solid fa-arrows-spin"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value" id="stats-in-progress">0</h3>
+            <p class="stat-label">In Progress</p>
+          </div>
+        </div>
+
+        <!-- Card 4: Resolved -->
+        <div class="stat-card glass-card">
+          <div class="stat-icon-wrapper resolved">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value" id="stats-resolved">0</h3>
+            <p class="stat-label">Resolved Issues</p>
+          </div>
+        </div>
+
+        <!-- Card 5: High Priority -->
+        <div class="stat-card glass-card highlight-danger">
+          <div class="stat-icon-wrapper priority-high">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value" id="stats-high-priority">0</h3>
+            <p class="stat-label">High Priority</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complaints Section -->
+    <section id="complaints" class="complaints-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Reported Complaints</h2>
+          <p class="section-desc">Search, filter, and track public complaints submitted by citizens.</p>
+        </div>
+      </div>
+
+      <!-- Search, Filter & Sort Controls -->
+      <div class="controls-bar glass-card">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="search-input" placeholder="Search by citizen name, category, or location..." autocomplete="off">
+        </div>
+        <div class="filters-group">
+          <div class="filter-item">
+            <label for="filter-status"><i class="fa-solid fa-filter"></i> Status</label>
+            <select id="filter-status">
+              <option value="All">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label for="sort-by"><i class="fa-solid fa-arrow-down-wide-short"></i> Sort</label>
+            <select id="sort-by">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div class="loading-container" id="loading-spinner">
+        <div class="spinner"></div>
+        <p>Fetching complaints data...</p>
+      </div>
+
+      <!-- Complaints List Container -->
+      <div class="complaints-grid" id="complaints-container">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state-wrapper" id="empty-state" style="display: none;">
+        <div class="empty-state-icon">
+          <i class="fa-solid fa-circle-question"></i>
+        </div>
+        <h3 class="empty-state-title">No Complaints Found</h3>
+        <p class="empty-state-desc">There are no complaints matching your criteria. Try adjusting your filters or search terms.</p>
+        <button class="btn btn-primary btn-lg" id="btn-empty-state-lodge">
+          <i class="fa-solid fa-plus"></i> Lodge a New Complaint
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo-icon">
+          <i class="fa-solid fa-building-shield"></i>
+        </div>
+        <span>CivicConnect</span>
+      </div>
+      <p class="footer-text">
+        &copy; 2026 CivicConnect Portal. All rights reserved. Designed to improve local governance and accountability.
+      </p>
+      <div class="footer-links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#complaints">Complaints</a>
+        <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">Powered by Supabase</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lodge/Edit Complaint Modal -->
+  <div class="modal-overlay" id="complaint-modal">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title-text"><i class="fa-solid fa-clipboard-question"></i> Lodge New Complaint</h3>
+        <button class="close-btn" id="btn-close-complaint-modal">&times;</button>
+      </div>
+      <form id="complaint-form" novalidate>
+        <input type="hidden" id="complaint-id">
+        <div class="modal-body">
+          <!-- Name, Email, Phone Grid -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-name"><i class="fa-solid fa-user"></i> Full Name <span class="required">*</span></label>
+              <input type="text" id="form-name" placeholder="John Doe" required>
+              <span class="error-msg" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="form-email"><i class="fa-solid fa-envelope"></i> Email Address <span class="required">*</span></label>
+              <input type="email" id="form-email" placeholder="john@example.com" required>
+              <span class="error-msg" id="err-email"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-phone"><i class="fa-solid fa-phone"></i> Phone Number <span class="required">*</span></label>
+              <input type="tel" id="form-phone" placeholder="e.g. 1234567890 (numbers only)" required>
+              <span class="error-msg" id="err-phone"></span>
+            </div>
+            <div class="form-group">
+              <label for="form-category"><i class="fa-solid fa-layer-group"></i> Category <span class="required">*</span></label>
+              <select id="form-category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Garbage Collection">Garbage Collection</option>
+                <option value="Road Damage">Road Damage</option>
+                <option value="Water Leakage">Water Leakage</option>
+                <option value="Street Light">Street Light</option>
+                <option value="Drainage">Drainage</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Tree Fallen">Tree Fallen</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-msg" id="err-category"></span>
+            </div>
+          </div>
+
+          <!-- Location & Priority Grid -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-location"><i class="fa-solid fa-map-location-dot"></i> Location/Address <span class="required">*</span></label>
+              <input type="text" id="form-location" placeholder="e.g. 123 Main St, Sector A" required>
+              <span class="error-msg" id="err-location"></span>
+            </div>
+            <div class="form-group">
+              <label for="form-priority"><i class="fa-solid fa-triangle-exclamation"></i> Priority</label>
+              <select id="form-priority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+              <span class="error-msg" id="err-priority"></span>
+            </div>
+          </div>
+
+          <!-- Status Row (Visible during EDIT only) -->
+          <div class="form-group" id="form-status-group" style="display: none;">
+            <label for="form-status"><i class="fa-solid fa-bars-progress"></i> Status</label>
+            <select id="form-status">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+            <span class="error-msg" id="err-status"></span>
+          </div>
+
+          <!-- Description Textarea -->
+          <div class="form-group">
+            <label for="form-description"><i class="fa-solid fa-paragraph"></i> Description <span class="required">*</span></label>
+            <textarea id="form-description" rows="4" placeholder="Please describe the issue in detail (minimum 10 characters)..." required></textarea>
+            <span class="error-msg" id="err-description"></span>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-complaint-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-complaint">
+            Submit Complaint <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-card glass-card modal-confirm">
+      <div class="modal-header header-danger">
+        <h3 class="modal-title"><i class="fa-solid fa-trash-can"></i> Confirm Deletion</h3>
+        <button class="close-btn" id="btn-close-delete-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this complaint? This action cannot be undone.</p>
+        <div class="delete-summary-card">
+          <div id="delete-complaint-num" class="delete-meta">Complaint #---</div>
+          <div id="delete-complaint-title" class="delete-desc">...</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btn-cancel-delete-modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="btn-confirm-delete">
+          Yes, Delete <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Client-Side JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
